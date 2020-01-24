@@ -1,17 +1,35 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
 import './App.css';
-// import Data from './data';
-import Login from './login';
-// import Signup from './signup';
+import SignUpForm from '../src/page/signupform';
+import SignInForm from '../src/page/signinform';
 
-function App() {
-  return (
-    <div className="App">
-      {/* <Data /> */}
-      <Login />
-      {/* <Signup /> */}
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <Router basename="/react-auth-ui/" >
+        <div className="App">
+          <div className="App__Aside"></div>
+          <div className="App__Form">
+            <div className="PageSwitcher">
+              <NavLink exact to="/profile" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Profile</NavLink>
+              <NavLink to="sign-in" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item" replace>Sign In</NavLink>
+              <NavLink exact to="sign-up" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sign Up</NavLink>
+
+            </div>
+            <div className="FormTitle">
+              <NavLink to="/sign-in" activeClassName="FormTitle__Link--Active" className="FormTitle__Link">Sign In</NavLink> or <NavLink exact to="/" activeClassName="FormTitle__Link--Active" className="FormTitle__Link">Sign Up</NavLink>
+            </div>
+            <Route exact path="/" component={SignUpForm}>
+            </Route>
+            <Route path="/sign-in" component={SignInForm}>
+            </Route>
+          </div>
+        </div>
+      </Router>
+    );
+
+  }
+
 }
-
 export default App;

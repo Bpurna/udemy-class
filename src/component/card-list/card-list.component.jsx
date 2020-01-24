@@ -2,7 +2,7 @@ import React from 'react';
 import './card-list.css';
 import Card from '../card/card';
 
-const CardList = (provps) => {
+const CardList = (props) => {
     return <div className='card-list'>
         {
             props.monstars.map(monstar => (

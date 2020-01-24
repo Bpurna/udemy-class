@@ -16,7 +16,6 @@ export default class Login extends Component {
     }
    
     login() {
-        debugger;
         if (this.state.userid === 'basanthpoornima93@gmail.com') {
             // console.log(this.props);
             if (this.state.password === "1234") {
@@ -35,9 +34,9 @@ export default class Login extends Component {
         this.setState({ password: event.target.value });
     }
     render() {
+        console.log(this.props,"jgjhgdjg");
         return (
             <div>
-
                 <div className="main-div">
                     <div className="sub-div">
                         <form>
@@ -57,7 +56,6 @@ export default class Login extends Component {
                     </div>
                 </div>
             </div>
-
         )
     }
 }

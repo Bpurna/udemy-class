@@ -32,8 +32,8 @@ class Signup extends Component {
             } else {
                 this.setState({ usermsg: 'Invalid password' })
             }
-        }else{
-            this.setState({usermsg:'Inavlid userName'})
+        } else {
+            this.setState({ usermsg: 'Inavlid userName' })
         }
     }
     Fname(event) {
@@ -53,6 +53,7 @@ class Signup extends Component {
     }
     render() {
         return (
+            <Login>
             <div  >
                 <div className="sub-div" >
                     <h1 className="mainText" > SignUp </h1 >
@@ -80,14 +81,14 @@ class Signup extends Component {
                         <i className="fa fa-phone icon"></i>
                         <input className="input-values" type="number" name="mobile" id="mobile" placeholder="MobileNumber" onChange={this.MNO}
                             pattern="\d{3}[\-]\d{3}[\-]\d{4}"
-                            maxLength="10" 
+                            maxLength="10"
                         /><span id="message"></span>
                     </label>
-                    <label style={{color:'red'}}>{this.state.usermsg}</label>
+                    <label style={{ color: 'red' }}>{this.state.usermsg}</label>
                     <button type="button" onClick={() => this.sign()} className="button" > Signup</button >
                 </div>
-                <Login />
             </div >
+            </Login>
         );
     }
 }
