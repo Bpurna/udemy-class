@@ -113,7 +113,7 @@
   margin-bottom: 40px;
 }
 
-.FormField__Label {
+.FormFieldLabel {
   display: block;
   text-transform: uppercase;
   font-size: .9em;
@@ -136,7 +136,7 @@
   color: #616E7F;
 }
 
-.FormField__Button {
+.FormFieldButton {
   background-color: #52C4B9;
   color: white;
   border: none;

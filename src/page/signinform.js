@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import '../App.css';
 
 export default class SignInForm extends Component {
     constructor(props) {
@@ -7,35 +7,57 @@ export default class SignInForm extends Component {
         this.state = {
             email: '',
             password: '',
-        };
+            alertmsg: '',
+            arrayvar: [],
+        }
+        this.handleChange = this.handleChange.bind(this);
+        this.signin = this.signin.bind(this);
     }
     handleChange(e) {
         this.setState({ [e.target.name]: e.target.value });
     }
-
-    handleSubmit() {
-        console.log('The form was submitted with the following data:');
-        this.setState({ email: '', password: '' });
+    signin(e) {
+        if (this.state.email === '') {
+            this.setState({ alertmsg: 'Email should not be empty' });
+        } else if (!this.state.email.includes('@')) {
+            this.setState({ alertmsg: 'Please enter with special valid email' })
+        } else if (!this.state.email.includes('.com') && !this.state.email.includes('.in')) {
+            this.setState({ alertmsg: 'Email ends with .com or .in' })
+        }
+        else if (this.state.password === '' || this.state.password.length < 6) {
+            this.setState({ alertmsg: "Plase enter password and password should not be less than 6 charactes and " })
+            return false;
+        } else if (!this.state.password.includes('@')) {
+            this.setState({ alertmsg: 'require special characters' })
+        }
+        else {
+            this.setState({
+                arrayvar: this.state.arrayvar.concat({ email: this.state.email, password: this.state.password, }),
+                password: '', email: '', alertmsg: ''
+            }, () => console.log(this.state.arrayvar),
+            )
+        }
+        // this.props.history.push({ pathname: '/sign-up',state:this.state });
     }
-
     render() {
         return (
             <div className="FormCenter">
-                <form onSubmit={this.handleSubmit.bind(this)} className="FormFields" >
+                <form onSubmit={this.handleSubmit} className="FormFields">
                     <div className="FormField">
-                        <label className="FormField__Label" htmlFor="email">E-Mail Address</label>
-                        <input type="email" id="email" className="FormField__Input" placeholder="Enter your email" name="email" value={this.state.email} onChange={this.handleChange.bind(this)} />
+                        <label className="FormFieldLabel" htmlFor="email">E-Mail Address</label>
+                        <input type="email" id="email" className="FormField__Input" placeholder="Enter your email" name="email" value={this.state.email} onChange={this.handleChange} />
                     </div>
                     <div className="FormField">
-                        <label className="FormField__Label" htmlFor="password">Password</label>
-                        <input type="password" id="password" className="FormField__Input" placeholder="Enter your password" name="password" value={this.state.password} onChange={this.handleChange.bind(this)} />
+                        <label className="FormFieldLabel" htmlFor="password">Password</label>
+                        <input type="password" id="password" className="FormField__Input" placeholder="Enter your password" value={this.state.password} name="password" onChange={this.handleChange} />
                     </div>
+                    <label style={{ color: 'red' }}>{this.state.alertmsg}</label>
                     <div className="FormField">
-                        {this.props.arrayvar && this.props.arrayvar.map(val => alert("res", val.name))}
-                        <button className="FormField__Button mr-20">Sign In</button> <Link to="/" className="FormField__Link">Create an account</Link>
+                        <button type="button" className="FormFieldButton " onClick={() => this.signin()} >signin </button>
                     </div>
                 </form>
             </div>
-        );
+        )
     }
 }
+
